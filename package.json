@@ -1,0 +1,20 @@
+{
+  "name": "advancedproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "production": "./node_modules/.bin/encore production",
+    "dev": "./node_modules/.bin/encore dev --watch"
+
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.30.2"
+  }
+}

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block stylesheet %} 
+{{parent()}}
+
+{%if app.user %}
+
+    <link rel="stylesheet" href="{{asset('assets/css/likes.css')}}">
+{%endif%}
+{% endblock %}
+{% block main %}
+
+<main role="main">
+
+    <section class="jumbotron text-center">
+        <div class="container">
+
+            <h1 class="jumbotron-heading">Category - {{subcategories.currentCategoryName}}</h1>
+            <div class="btn-group">
+                <div class="dropdown ml-2">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Subcategories
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <ul class="mr-5">
+                            <li><a href="{{path('video_list', {'categoryname': subcategories.mainParentName|slugify|lower, 'id': subcategories.mainParentId })}}">{{subcategories.mainParentName}}</a></li>
+                            {{subcategories.categoryList|raw}}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-row align-items-center ml-3">
+                    {{include('front/includes/_sort.html.twig')}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            {{include('front/includes/_videos.html.twig', {'videos': videos})}}
+        </div>
+    </div>
+
+    <!-- pagination -->
+    <div style="display: flex; justify-content: center; margin-top: 15px;">
+        {{knp_pagination_render(videos)}}
+    </div>
+    
+
+
+</main>
+{%endblock%}
+
+{% block javascript%}
+{%if app.user %}
+    <script src="{{asset('assets/js/likes.js')}}"></script>
+{%endif%}
+{%endblock%}
